@@ -40,8 +40,10 @@ public static void displayMenu()
 	<p>2. Login</p>
 	<p>Please enter 1 or 2</p>
 	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="orders.jsp">
-	<input type=text name="menuChoice" length=1>
-	<input type=submit>
+	<input type=hidden name="searchAttribute" value="login">
+	<input type=submit name="menuChoice" value = "1">
+	<input type=submit name="menuChoice" value = "2">
+	
     </form>
 	<%! 
 	
@@ -86,7 +88,7 @@ public static void displayDriverMenu()
 	System.out.println("4. Logout:");
 	System.out.println("pleasse enter your choice:");
 }
-//end of console write line menus
+//end of console write line menuss
 
 
 //this is main menu option 2
