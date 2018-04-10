@@ -12,18 +12,27 @@ function check_all_fields(form_obj){
 	}
 	return true;
 }
-
+function login()
+{
+	 window.location = "login.jsp";
+}
+function goToMain()
+{
+	window.location = "orders.jsp";
+}
 </script> 
 </head>
 <body>
 
-
+<form name="user_search" method=get onclick="login()" action="login.jsp">
+		<input type=button name="nil" value="backtologin">
+	</form>
 
 <%
 String menu = request.getParameter("menuChoice");
 
 if (menu != null) {
-	main(menu);
+	//main(menu);
 
 }
 
