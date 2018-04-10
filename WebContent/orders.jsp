@@ -43,7 +43,6 @@ public static void displayMenu()
 	<input type=hidden name="searchAttribute" value="login">
 	<input type=submit name="menuChoice" value = "1">
 	<input type=submit name="menuChoice" value = "2">
-	
     </form>
 	<%! 
 	
