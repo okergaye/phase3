@@ -14,11 +14,15 @@ function check_all_fields(form_obj){
 }
 function login()
 {
-	 window.location = "login.jsp";
+	window.location = "login.jsp";
 }
 function goToMain()
 {
 	window.location = "orders.jsp";
+}
+function register()
+{
+	window.location = "register.jsp";
 }
 </script> 
 </head>
@@ -33,6 +37,19 @@ String menu = request.getParameter("menuChoice");
 
 if (menu != null) {
 	//main(menu);
+	switch(menu)
+	{
+	case "1":
+		%>
+  		<script type="text/javascript"> register(); </script>
+		<%
+		break;	
+	case "2":
+		%>
+  		<script type="text/javascript"> login(); </script>
+		<%
+		break;
+	}
 
 }
 
