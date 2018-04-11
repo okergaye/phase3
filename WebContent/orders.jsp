@@ -16,7 +16,7 @@ function login()
 {
 	window.location = "login.jsp";
 }
-function goToMain()
+function orders()
 {
 	window.location = "orders.jsp";
 }
@@ -44,10 +44,8 @@ if (menu != null) {
   		<script type="text/javascript"> register(); </script>
 		<%
 		break;	
-	case "2":
-		%>
-  		<script type="text/javascript"> login(); </script>
-		<%
+	case "2"://this is for login
+		
 		break;
 	}
 

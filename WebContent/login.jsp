@@ -1,10 +1,8 @@
 	<p>Login</p>
-	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="login.jsp">
-	<input type=hidden name="searchAttribute" value="login">
-	<input type=text name="attributeValue" length=10>
+	<form name="user_search" method=get onsubmit="orders()" action="orders.jsp">
+	<input type=hidden name="searchAttribute" value="user">
+	<input type=text name="login">
 	<p>Password</p>
-	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="login.jsp">
-	<input type=hidden name="searchAttribute" value="password">
-	<input type=text name="attributeValue" length=10>
-	<input type=submit name="tempName" value = "Login">
+	<input type=text name="password">
+	<input type=submit  value = "Enter">
     </form>
