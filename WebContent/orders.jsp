@@ -24,6 +24,42 @@ function register()
 {
 	window.location = "register.jsp";
 }
+function reserve()
+{
+	window.location = "reserve.jsp";	
+}
+function favorite()
+{
+	window.location = "favorite.jsp";	
+}
+function record()
+{
+	window.location = "record.jsp";	
+}
+function browse()
+{
+	window.location = "browse.jsp";	
+}
+function trust()
+{
+	window.location = "trust.jsp";	
+}
+function write()
+{
+	window.location = "write.jsp";	
+}
+function view()
+{
+	window.location = "view.jsp";	
+}
+function rate()
+{
+	window.location = "rate.jsp";	
+}
+function search()
+{
+	window.location = "search.jsp";	
+}
 </script> 
 </head>
 <body>
