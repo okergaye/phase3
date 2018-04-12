@@ -1,3 +1,21 @@
+<html>
+<head>
+<script LANGUAGE="javascript">
+function reserve()
+{
+	window.location = "reserve.jsp";	
+	system.out.println("TEST");
+}
+
+function favorite()
+{
+	window.location = "favorite.jsp";	
+}
+
+</script> 
+</head>
+<body>
+
 Welcome to UUBER System
 	<p>1. Reserve an UberCar</p>
 	<p>2. Favorite an UberCar</p>
@@ -10,10 +28,10 @@ Welcome to UUBER System
 	<p>9. Search UberDriver Feedbacks</p>
 	<p>10. Logout</p>
 	<p>Please press your desired choice.</p>
-	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="userMenu.jsp">
+	<form name="user_search" method=get action="userMenu.jsp">
 	<input type=hidden name="searchAttribute" value="login">
-	<input type=submit name="userChoice" value = "1">
-	<input type=submit name="userChoice" value = "2">
+	<input type=button onclick="reserve()" value = "1" >
+	<input type=button onclick="favorite()" value = "2">
 	<input type=submit name="userChoice" value = "3">
 	<input type=submit name="userChoice" value = "4">
 	<input type=submit name="userChoice" value = "5">

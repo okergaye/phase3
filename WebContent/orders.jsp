@@ -27,6 +27,7 @@ function register()
 function reserve()
 {
 	window.location = "reserve.jsp";	
+	system.out.println("TEST");
 }
 function favorite()
 {
@@ -71,6 +72,7 @@ function search()
 <%
 String menu = request.getParameter("menuChoice");
 
+
 if (menu != null) {
 	//main(menu);
 	switch(menu)
@@ -109,34 +111,7 @@ public static void displayMenu()
 	
 }
 
-public static void displayUserTypeMenu()
-{
-	System.out.println("        Welcome to UUber System     ");
-	System.out.println("1. Standard User:");
-	System.out.println("2. Driver User:");
-	System.out.println("3. Go Back:");
-	System.out.println("pleasse enter your choice:");
-}
 
-public static void displayUserMenu()
-{
-	System.out.println("        Welcome to UUber System     ");
-	System.out.println("1. Reserve a UberCar:");
-	System.out.println("2. Favorite UberCar:");
-	System.out.println("3. Record a Ride:");
-	System.out.println("4. Write Feedback for UberCar:");
-	System.out.println("5. View Feedback for UberCar:");
-	System.out.println("6. Rate Feedback:");
-	System.out.println("7. Set User to Trusted:");
-	System.out.println("8. Set User to Not Trusted:");
-	System.out.println("9. Browse UC:");
-	System.out.println("10. Search UD Feedbacks:");
-	System.out.println("11. Two Degrees of Seperation:");
-	System.out.println("12. Statistics:");
-	System.out.println("13. User Awards (admin only):");
-	System.out.println("14. Logout:");
-	System.out.println("pleasse enter your choice:");
-}
 
 public static void displayDriverMenu()
 {
@@ -162,7 +137,7 @@ public static void startUser(BufferedReader in, Connector con, Database user) th
 	// Start loop
 	while(loggedIn)
 	{
-		displayUserMenu();
+	//	displayUserMenu();
 		
 		//Find which option to go to
 		choice = in.readLine();
@@ -581,6 +556,7 @@ public static void startDriver(BufferedReader in, Connector con, Database user) 
 // this is actually the reg menu!!! aka main menu option 1
 public static void mainMenu(BufferedReader in, Connector con, Database user, String menu) throws IOException
 {
+	
 	String choice;
     int c=0;
     String name;
@@ -611,7 +587,7 @@ public static void mainMenu(BufferedReader in, Connector con, Database user, Str
 		switch(c)
 		{
 		case 1: //Registration
-			displayUserTypeMenu();
+		//	displayUserTypeMenu();
 	    	
 			// Check if user registration for standard or driver
 			//choice = in.readLine();
@@ -658,7 +634,7 @@ public static void mainMenu(BufferedReader in, Connector con, Database user, Str
 			break;
 			
 		case 2: //Login
-			displayUserTypeMenu();
+		//	displayUserTypeMenu();
 	    	
 			// Check if user registration for standard or driver
 			choice = in.readLine();
@@ -680,16 +656,24 @@ public static void mainMenu(BufferedReader in, Connector con, Database user, Str
 				break;
 			}
 			
-			System.out.println("Login:");
-			login = in.readLine();
-			System.out.println("Password:");
-			password = in.readLine();
+			%> 
+			
+			<% 
+			Database user = new Database();
+			Connector con = new Connector();
+			String login = request.getParameter("login");
+			String password = request.getParameter("password");
+			user.verifyLogin(login, password, request.getParameter("person"), con.stmt);
+		//	user.verifyLogin(login, password, "user", con.stmt);
+
+			%>
+			<%!
 			
 			// Check if the login is true or not
-			if (c == 1)
-				user.verifyLogin(login, password, "user", con.stmt);
-			else
-				user.verifyLogin(login, password, "driver", con.stmt);
+		//	if (c == 1)
+			//	user.verifyLogin(login, password, "user", con.stmt);
+		//	else
+				//user.verifyLogin(login, password, "driver", con.stmt);
 			
 			// If the user is logged in switch to their menu
 			if (user.loggedIn == true)
