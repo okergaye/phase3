@@ -11,7 +11,38 @@ function favorite()
 {
 	window.location = "favorite.jsp";	
 }
-
+function record()
+{
+	window.location = "record.jsp";	
+}
+function writeFB()
+{
+	window.location = "write.jsp";	
+}
+function view()
+{
+	window.location = "view.jsp";	
+}
+function rate()
+{
+	window.location = "rate.jsp";	
+}
+function trust()
+{
+	window.location = "trust.jsp";	
+}
+function browse()
+{
+	window.location = "browse.jsp";	
+}
+function search()
+{
+	window.location = "search.jsp";	
+}
+function orders()
+{
+	window.location = "orders.jsp";
+}
 </script> 
 </head>
 <body>
@@ -32,12 +63,12 @@ Welcome to UUBER System
 	<input type=hidden name="searchAttribute" value="login">
 	<input type=button onclick="reserve()" value = "1" >
 	<input type=button onclick="favorite()" value = "2">
-	<input type=submit name="userChoice" value = "3">
-	<input type=submit name="userChoice" value = "4">
-	<input type=submit name="userChoice" value = "5">
-	<input type=submit name="userChoice" value = "6">
-	<input type=submit name="userChoice" value = "7">
-	<input type=submit name="userChoice" value = "8">
-	<input type=submit name="userChoice" value = "9">
-	<input type=submit name="userChoice" value = "10">
+	<input type=button onclick="record()" value = "3">
+	<input type=button onclick="writeFB()" value = "4">
+	<input type=button onclick="view()" value = "5">
+	<input type=button onclick="rate()" value = "6">
+	<input type=button onclick="trust()" value = "7">
+	<input type=button onclick="browse()" value = "8">
+	<input type=button onclick="search()" value = "9">
+	<input type=button onclick="orders()" value = "10">
     </form>
