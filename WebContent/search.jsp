@@ -40,7 +40,9 @@ else
 {
 	Database user = new Database();
 	Connector con = new Connector();
-	user.usefullFeedback(username, number, con.stmt);
+	String result = user.usefullFeedback(username, number, con.stmt);;
+	
+	out.print(result);
 	%>
 	<form>
 	<input type=button onclick="menu()" value = "Return To Main Menu">

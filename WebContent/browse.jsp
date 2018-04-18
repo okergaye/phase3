@@ -33,7 +33,7 @@ if (catagory == null && address == null && model == null)
 If Blank it will not be considered.
 	<p>Category</p>
 	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="browse.jsp">
-	<input type=hidden name="searchAttribute" value="cata">
+	<input type=hidden name="searchAttribute" value="user">
 	<input type=text name="cate">
 	<p>Address (City, State)</p>
 	<input type=text name="address">
@@ -52,7 +52,20 @@ else
 {
 	Database user = new Database();
 	Connector con = new Connector();
-	user.userBrowseUC(login, catagory, address, model, choice, con.stmt);
+	if (catagory == null)
+	{
+		catagory = "";
+	}
+	if (address == null)
+	{
+		address = "";
+	}
+	if (model == null)
+	{
+		model = "";
+	}
+	String result = user.userBrowseUC(login, catagory, address, model, choice, con.stmt);
+	out.print(result);
 	%>
 	<form>
 	<input type=button onclick="menu()" value = "Return To Main Menu">

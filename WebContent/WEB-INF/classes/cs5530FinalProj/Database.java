@@ -23,7 +23,7 @@ public class Database
 	{}
 	
 	//for number 10 start
-	public void usefullFeedback(String UDLogin, String numToDisplay, Statement s)
+	public String usefullFeedback(String UDLogin, String numToDisplay, Statement s)
 	{	
 		String sql = "SELECT fid, text, fbdate, Owned.vin, bestFeedback.login, usefullness from (Select UC.vin, UD.login from  UC,UD where "
 				+ "UC.login = '" + UDLogin + "' and UC.login = UD.login) as Owned, (Select F.vin, F.fid, F.text, F.fbdate, F.login, R.sumRate as usefullness from "
@@ -36,12 +36,12 @@ public class Database
 			rs = s.executeQuery(sql);
 			while (rs.next()) {
 				//this is only for getting stuff back
-				output += "|| usefullness: " +rs.getString("usefullness") + "\n";
+				output += "|| usefullness: " +rs.getString("usefullness") + " ";
 				output +=  "|| Fid: " + rs.getString("fid") + " ";
 				output +=  "|| Feedback text: " + rs.getString("text") + " ";
 				output += "|| Date of Feedback: " + rs.getString("fbdate") + " ";
 				output += "|| vin: " + rs.getString("vin") + " ";
-				output += "|| Feedbackers login: " +rs.getString("login") + " ";
+				output += "|| Feedbackers login: " +rs.getString("login") + "<br>";
 
 			}
 			rs.close();
@@ -56,7 +56,7 @@ public class Database
 			}
 		}
 		
-		System.out.println(output);	
+		return output;	
 	}
 	// number 10 end
 	
@@ -123,7 +123,7 @@ public class Database
 	}
 
 
-	private int insertSQL(Statement s, String sql) 
+	public int insertSQL(Statement s, String sql) 
 	{
 		int output = -1;
 		try
@@ -150,7 +150,7 @@ public class Database
 	}
 
 	// problem 9 begin
-	public int userBrowseUC(String login, String catagory, String address, String model, String choice, Statement s) 
+	public String userBrowseUC(String login, String catagory, String address, String model, String choice, Statement s) 
 	{
 		//Make things and normalize
 		choice.toLowerCase();
@@ -158,7 +158,7 @@ public class Database
 
 		// if choice is not valid quit life
 		if (!choice.equals("a") && !choice.equals("b")) {
-			return 0;
+			return "";
 		}
 		
 		//discover which combination is selected
@@ -191,12 +191,10 @@ public class Database
 						
 		}
 		
-		System.out.println(browseSQLHelper(s, sql));
-
-		return 1;
+		return browseSQLHelper(s, sql);
 	}
 
-	private String browseSQLHelper(Statement s, String sql) 
+	public String browseSQLHelper(Statement s, String sql) 
 	{
 		ResultSet rs = null;
 		String output = "";
@@ -210,7 +208,7 @@ public class Database
 				output += rs.getString("login") + " ";
 				output += rs.getString("make") + " ";
 				output += rs.getString("model") + " ";
-				output += rs.getString("AvgRating") + "\n";
+				output += rs.getString("AvgRating") + "<br>";
 
 			}
 			rs.close();

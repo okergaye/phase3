@@ -40,7 +40,7 @@ else
 	String result =	fb.getFeedback(vin, con.stmt);
 	
 	System.out.println("Here are your results: \n" + result);
-	out.print(result);
+	out.print("Here are your results: <br>" + result);
 	%>
 	<form>
 	<input type=button onclick="menu()" value = "Return To Main Menu">

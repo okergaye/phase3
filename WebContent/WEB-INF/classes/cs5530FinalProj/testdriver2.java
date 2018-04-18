@@ -65,7 +65,7 @@ public class testdriver2 {
 	//this is main menu option 2
 	public static void startUser(BufferedReader in, Connector con, Database user) throws IOException
 	{
-		String choice, username, username2, vin, feedback, fid, score, from, to, model, address, catagory, number, output;
+		String choice, username, username2, vin, feedback, fid, score, from, to, model, address, catagory, number, output, tempOutput;
 		boolean loggedIn = true;
 		boolean choiceTrue = false;
 		Feedback fb = new Feedback();
@@ -236,7 +236,9 @@ public class testdriver2 {
 				System.out.println("please enter your choice:");
 				choice = in.readLine();
 				
-				user.userBrowseUC(user.login, catagory, address, model, choice, con.stmt);
+				tempOutput = user.userBrowseUC(user.login, catagory, address, model, choice, con.stmt);
+				
+				System.out.println(tempOutput);				
 				
 				break;
 				
@@ -245,7 +247,10 @@ public class testdriver2 {
 				username = in.readLine();
 				System.out.println("please enter the number of feedbacks to display:");
 				number = in.readLine();
-				user.usefullFeedback(username, number, con.stmt);
+				
+				tempOutput = user.usefullFeedback(username, number, con.stmt);
+				
+				System.out.println(tempOutput);
 				
 				break;
 				

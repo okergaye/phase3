@@ -23,7 +23,7 @@ public class Feedback {
 	 		{
 	 			text = rs.getString("text");
 	 			fid = rs.getString("fid");
-	 		 	output +="\nReview text: " + text + " \nFid: " + fid +"" ;
+	 		 	output +="<br>Review text: " + text + " <br>Fid: " + fid +"" ;
 
 	 		}
 	     

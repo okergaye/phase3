@@ -55,7 +55,7 @@ else
 		if (type.equals("user"))
 			session.setAttribute("login", templogin);
 			%>
-	  		<script type="text/javascript"> register(); </script>
+	  		<script type="text/javascript"> menu(); </script>
 			<%
 		//else
 			//nothing yet
