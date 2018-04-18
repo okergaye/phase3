@@ -20,6 +20,10 @@ function menu()
 {
 	window.location = "userMenu.jsp";
 }
+function dmenu()
+{
+	window.location = "driverMenu.jsp";
+}
 </script> 
 </head>
 <body>
@@ -52,13 +56,20 @@ else
 	
 	if (user.loggedIn == true)
 	{
+		session.setAttribute("login", templogin);
+		
 		if (type.equals("user"))
-			session.setAttribute("login", templogin);
+		{
 			%>
 	  		<script type="text/javascript"> menu(); </script>
 			<%
-		//else
-			//nothing yet
+		}
+		else // Go to driver menu
+		{
+			%>
+	  		<script type="text/javascript"> dmenu(); </script>
+			<%
+		}
 	}
 	else
 	{
