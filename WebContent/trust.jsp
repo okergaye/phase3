@@ -20,10 +20,10 @@ function menu()
 </head>
 <body>
 <%
-String username = request.getParameter("user");
+String username = request.getParameter("username");
 String trusttype = request.getParameter("trust");
 String login = (String)session.getAttribute("login");
-if (username == null || trusttype == null)
+if (username == null && trusttype == null)
 {
 %>
 	<p>Other persons Username</p>
@@ -48,7 +48,11 @@ else
 		trust = 1;
 	}
 	
-	if (user.userExists(username, con.stmt) == 1)
+	int check = user.userExists(username, con.stmt);
+	
+	System.out.println(username);
+	
+	if (check == 1)
 	{
 		int result = user.trustUser(login, username, trust, con.stmt);
 		if (result == 1)
@@ -62,7 +66,7 @@ else
 	}
 	else
 	{
-		System.out.println("User does not exists.");
+		out.print("User does not exists.");
 	}
 	%>
 	<form>
