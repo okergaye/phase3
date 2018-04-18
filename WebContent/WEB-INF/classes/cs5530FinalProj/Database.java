@@ -158,7 +158,7 @@ public class Database
 
 		// if choice is not valid quit life
 		if (!choice.equals("a") && !choice.equals("b")) {
-			return "";
+			return "FAILED";
 		}
 		
 		//discover which combination is selected

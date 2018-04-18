@@ -21,7 +21,7 @@ function menu()
 <body>
 
 <%
-String catagory = request.getParameter("cata");
+String catagory = request.getParameter("catagory");
 String address = request.getParameter("address");
 String model = request.getParameter("model");
 String choice = request.getParameter("sort");
@@ -34,16 +34,16 @@ If Blank it will not be considered.
 	<p>Category</p>
 	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="browse.jsp">
 	<input type=hidden name="searchAttribute" value="user">
-	<input type=text name="cate">
+	<input type=text name="catagory">
 	<p>Address (City, State)</p>
 	<input type=text name="address">
 	<p>Car Model</p>
 	<input type=text name="model">
 	<p>Sorting Order</p>
-	<p>(A) Average Numerical Score of Feedbacks</p>
-	<p>(B) Average Numerical Score of Trusted User Feedbacks</p>
-	<input type=submit name="sort" value = "A">
-	<input type=submit name="sort" value = "B">
+	<p>(a) Average Numerical Score of Feedbacks</p>
+	<p>(b) Average Numerical Score of Trusted User Feedbacks</p>
+	<input type=submit name="sort" value = "a">
+	<input type=submit name="sort" value = "b">
 	</form>
 	
 	<%
