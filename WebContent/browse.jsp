@@ -1,15 +1,43 @@
+<%@ page language="java" import="cs5530FinalProj.*,java.lang.*,java.sql.*,java.util.ArrayList,java.io.*" %>
+
+<html>
+<head>
+<script LANGUAGE="javascript">
+
+function check_all_fields(form_obj){
+	alert(form_obj.searchAttribute.value+"='"+form_obj.attributeValue.value+"'");
+	if( form_obj.attributeValue.value == ""){
+		alert("Search field should be nonempty");
+		return false;
+	}
+	return true;
+}
+function menu()
+{
+	window.location = "userMenu.jsp";
+}
+</script> 
+</head>
+<body>
+
+<%
+String catagory = request.getParameter("cata");
+String address = request.getParameter("address");
+String model = request.getParameter("model");
+String choice = request.getParameter("sort");
+String login = (String)session.getAttribute("login");
+if (catagory == null && address == null && model == null)
+{
+%>
+
 If Blank it will not be considered.
 	<p>Category</p>
-	<form name="user_search" method=get onsubmit="orders()" action="orders.jsp">
-	<input type=hidden name="searchAttribute" value="user">
+	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="browse.jsp">
+	<input type=hidden name="searchAttribute" value="cata">
 	<input type=text name="cate">
 	<p>Address (City, State)</p>
-	<form name="user_search" method=get onsubmit="orders()" action="orders.jsp">
-	<input type=hidden name="searchAttribute" value="user">
 	<input type=text name="address">
 	<p>Car Model</p>
-	<form name="user_search" method=get onsubmit="orders()" action="orders.jsp">
-	<input type=hidden name="searchAttribute" value="user">
 	<input type=text name="model">
 	<p>Sorting Order</p>
 	<p>(A) Average Numerical Score of Feedbacks</p>
@@ -17,3 +45,18 @@ If Blank it will not be considered.
 	<input type=submit name="sort" value = "A">
 	<input type=submit name="sort" value = "B">
 	</form>
+	
+	<%
+}
+else
+{
+	Database user = new Database();
+	Connector con = new Connector();
+	user.userBrowseUC(login, catagory, address, model, choice, con.stmt);
+	%>
+	<form>
+	<input type=button onclick="menu()" value = "Return To Main Menu">
+	</form>
+	<%
+}
+%>
