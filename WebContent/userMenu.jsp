@@ -39,9 +39,9 @@ function search()
 {
 	window.location = "search.jsp";	
 }
-function orders()
+function login()
 {
-	window.location = "orders.jsp";
+	window.location = "login.jsp";
 }
 </script> 
 </head>
@@ -70,5 +70,5 @@ Welcome to UUBER System
 	<input type=button onclick="trust()" value = "7">
 	<input type=button onclick="browse()" value = "8">
 	<input type=button onclick="search()" value = "9">
-	<input type=button onclick="orders()" value = "10">
+	<input type=button onclick="login()" value = "10">
     </form>

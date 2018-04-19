@@ -12,9 +12,9 @@ function check_all_fields(form_obj){
 	}
 	return true;
 }
-function orders()
+function register()
 {
-	window.location = "orders.jsp";
+	window.location = "register.jsp";
 }
 function menu()
 {
@@ -40,15 +40,31 @@ if (templogin == null && temppassword == null)
 	<input type=text name="templogin">
 	<p>Password</p>
 	<input type=text name="temppassword">
-	<input type=submit name="person" value = "user">
-	<input type=submit name="person" value = "driver">
+	<input type=submit name="person" value = "Standard Login">
+	<input type=submit name="person" value = "Driver Login">
+	<input type=submit name="person" value = "Register User" >
     </form>
     
     
 <%
 }
+else if (type.equals("Register User"))
+{
+	%>
+	<script type="text/javascript"> register(); </script>
+	<%
+}
 else
 {
+	if (type.equals("Standard Login"))
+	{
+		type = "user";
+	}
+	else
+	{
+		type = "driver";
+	}
+	
 	Database user = new Database();
 	Connector con = new Connector();
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -81,8 +97,9 @@ else
 		<input type=text name="templogin">
 		<p>Password</p>
 		<input type=text name="temppassword">
-		<input type=submit name="person" value = "user">
-		<input type=submit name="person" value = "driver">
+		<input type=submit name="person" value = "User">
+		<input type=submit name="person" value = "Driver">
+		<input type=button onclick="register()" value = "Register" >
 	    </form>
 
 		<%

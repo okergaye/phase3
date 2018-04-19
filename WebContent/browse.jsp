@@ -46,7 +46,7 @@ If Blank it will not be considered.
 	<input type=submit name="sort" value = "b">
 	</form>
 	
-	<%
+<%
 }
 else
 {
