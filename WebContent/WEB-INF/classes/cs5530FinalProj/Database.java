@@ -268,8 +268,10 @@ public class Database
 				System.out.println("cannot close resultset");
 			}
 		} 
-		
-		if(Integer.parseInt(count) != 0) {
+		if(count == null) {
+			values = null;
+		}
+		else if(Integer.parseInt(count) != 0) {
 			
 			values = "VALUES ('" + 0 + "','" + cost + "', '" + date + "', '" + login + "',  '" + vin + "', '" + fromHour + "','" + toHour + "' ) ";
 		}
@@ -509,6 +511,7 @@ public class Database
 		}
     	else 
     	{
+    		
 		}
     	
     	return output;
