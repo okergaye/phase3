@@ -3,10 +3,8 @@
 <script LANGUAGE="javascript">
 function reserve()
 {
-	window.location = "reserve.jsp";	
-	system.out.println("TEST");
+	window.location = "reserve.jsp";
 }
-
 function favorite()
 {
 	window.location = "favorite.jsp";	

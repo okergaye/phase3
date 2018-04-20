@@ -140,5 +140,7 @@ else
 	<input type=submit name="gotTime" value = "Enter">
 	</form>
 	<%
+
+	session.setAttribute("confirmedList", new ArrayList<Triple>());
 }
 %>
