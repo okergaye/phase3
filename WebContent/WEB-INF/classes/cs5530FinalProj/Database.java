@@ -465,22 +465,23 @@ public class Database
 		} 
     }
     
-    public void suggestion(String login, String vin, Statement stmt)
+    public String suggestion(String login, String vin, Statement stmt)
     {
     	String sql = "Select r.vin, Count(*) as A "
     			+ "from Ride r, (select login from Ride where login != '" + login + "' and vin = '" + vin + "' limit 1) as T "
     			+ "where r.login = T.login and r.vin != '" + vin + "' "
     			+ "group by r.vin order by A desc";
     	
-    	String output = "";
+    	String output = "Might we suggest other popular cars users have used: <br/>";
     	ResultSet rs = null;
     	
 		try
 		{
 			rs=stmt.executeQuery(sql);
+			
 			while (rs.next())
 			{
-				output += "VIN #: " + rs.getString("vin") + "\n";
+				output += "VIN #: " + rs.getString("vin") + "<br/>";
 			}
 
 			rs.close();
@@ -504,14 +505,13 @@ public class Database
 		
     	if (output.equals("")) 
     	{
-    		System.out.println("No suggestions available.");
+    		output = "No suggestions available.";
 		}
     	else 
     	{
-			System.out.println("Might we suggest other popular cars users have used: ");
 		}
     	
-		System.out.println(output);
+    	return output;
     }
     
 	public int createUberUser(String login, String password, String name, String address, String phone, Statement stmt)

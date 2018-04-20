@@ -65,6 +65,11 @@ else if (confirm != null)
 			user.reserveCarInsert(login, temp.vin, temp.pid, temp.cost, temp.time, con.stmt);
 		}
 		out.print("Confirmed!");
+		%>
+		<form>
+		<input type=button onclick="menu()" value = "Return To Main Menu">
+		</form>
+		<%
 	}
 	else
 	{
@@ -116,7 +121,8 @@ else if (from != null || vin != null)
 			{
 				confirmedList.add(new Triple(vin, temp.pid, temp.cost, temp.time));
 				out.print("Added VIN #: "+ vin + "<br/>");
-				user.suggestion(login, vin, con.stmt);
+				out.print(user.suggestion(login, vin, con.stmt));
+				
 			}
 		}
 		
