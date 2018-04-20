@@ -26,6 +26,7 @@ String login = (String)session.getAttribute("login");
 if (username == null && trusttype == null)
 {
 %>
+Trust User Settings
 	<p>Other persons Username</p>
 	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="trust.jsp">
 	<input type=hidden name="searchAttribute" value="user">

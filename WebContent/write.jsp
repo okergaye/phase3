@@ -26,14 +26,15 @@ String login = (String)session.getAttribute("login");
 if (vin == null || feedback == null)
 {
 %>
-<p>Car VIN</p>
-<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="write.jsp">
-<input type=hidden name="searchAttribute" value="user">
-<input type=text name="vin">
-<p>Feedback</p>
-<input type=text name="feedback">
-<input type=submit  value = "Enter">
-</form>
+Write Feedback
+	<p>Car VIN</p>
+	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="write.jsp">
+	<input type=hidden name="searchAttribute" value="user">
+	<input type=text name="vin">
+	<p>Feedback</p>
+	<input type=text name="feedback">
+	<input type=submit  value = "Enter">
+	</form>
 <%
 }
 else

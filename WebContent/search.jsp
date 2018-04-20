@@ -25,6 +25,7 @@ String number = request.getParameter("numOfFB");
 if (username == null && number == null)
 {
 %>
+Search UDriver
 	<p>UberDriver Username</p>
 	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="search.jsp">
 	<input type=hidden name="searchAttribute" value="user">
