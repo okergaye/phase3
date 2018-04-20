@@ -29,7 +29,9 @@ String login = (String)session.getAttribute("login");
 if (catagory == null && address == null && model == null)
 {
 %>
-
+Browse UUber Car
+<br>
+<br>
 If Blank it will not be considered.
 	<p>Category</p>
 	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="browse.jsp">

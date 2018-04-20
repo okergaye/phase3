@@ -1,47 +1,22 @@
 <html>
 <head>
 <script LANGUAGE="javascript">
-function reserve()
-{
-	window.location = "reserve.jsp";	
-	system.out.println("TEST");
-}
 
-function favorite()
+function addCar()
 {
-	window.location = "favorite.jsp";	
+	window.location = "addCar.jsp";	
 }
-function record()
+function modCar()
 {
-	window.location = "record.jsp";	
+	window.location = "modCar.jsp";	
 }
-function writeFB()
+function setHours()
 {
-	window.location = "write.jsp";	
+	window.location = "setHour.jsp";	
 }
-function view()
+function login()
 {
-	window.location = "view.jsp";	
-}
-function rate()
-{
-	window.location = "rate.jsp";	
-}
-function trust()
-{
-	window.location = "trust.jsp";	
-}
-function browse()
-{
-	window.location = "browse.jsp";	
-}
-function search()
-{
-	window.location = "search.jsp";	
-}
-function orders()
-{
-	window.location = "orders.jsp";
+	window.location = "login.jsp";
 }
 </script> 
 </head>
@@ -55,8 +30,8 @@ Welcome to UUBER System
 	<p>Please press your desired choice.</p>
 	<form name="user_search" method=get action="driverMenu.jsp">
 	<input type=hidden name="searchAttribute" value="login">
-	<input type=button onclick="reserve()" value = "1" >
-	<input type=button onclick="favorite()" value = "2">
-	<input type=button onclick="record()" value = "3">
-	<input type=button onclick="orders()" value = "4">
+	<input type=button onclick="addCar()" value = "1" >
+	<input type=button onclick="modCar()" value = "2">
+	<input type=button onclick="setHours()" value = "3">
+	<input type=button onclick="login()" value = "4">
     </form>

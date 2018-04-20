@@ -34,6 +34,7 @@ String type = request.getParameter("person");
 if (templogin == null && temppassword == null)
 {
 %>
+Welcome to the UUber System
 	<p>Login</p>
 	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="login.jsp">
 	<input type=hidden name="searchAttribute" value="templogin">
@@ -90,17 +91,19 @@ else
 	else
 	{
 		%>
-		Incorrect Login or Password
+		Welcome to the UUber System
 		<p>Login</p>
 		<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="login.jsp">
 		<input type=hidden name="searchAttribute" value="templogin">
 		<input type=text name="templogin">
 		<p>Password</p>
 		<input type=text name="temppassword">
-		<input type=submit name="person" value = "User">
-		<input type=submit name="person" value = "Driver">
-		<input type=button onclick="register()" value = "Register" >
+		<input type=submit name="person" value = "Standard Login">
+		<input type=submit name="person" value = "Driver Login">
+		<input type=submit name="person" value = "Register User" >
 	    </form>
+	    
+	    Incorrect Login or Password
 
 		<%
 	}

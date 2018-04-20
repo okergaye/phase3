@@ -26,6 +26,7 @@ String login = (String)session.getAttribute("login");
 if (fid == null || score == null)
 {
 %>
+Rate Feedback
 	<p>Feedback FID</p>
 	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="rate.jsp">
 	<input type=hidden name="searchAttribute" value="user">

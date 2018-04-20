@@ -25,6 +25,7 @@ String vin = request.getParameter("vin");
 if (vin == null)
 {
 %>
+View Feedback
 	<p>Car VIN</p>
 	<form name="user_search" method=get onsubmit="return check_all_fields(this)" action="view.jsp">
 	<input type=hidden name="searchAttribute" value="viewVin">
