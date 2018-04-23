@@ -55,20 +55,45 @@ All fields should be non empty.
 else
 {
 	Database user = new Database();
-	Connector con = new Connector();
-	
-	int result;
+	Connector con=null;
+	try
+	{
+		con = new Connector();
+		
+		int result;
 
-	result = user.addHours(login, from, to, con.stmt);
+		result = user.addHours(login, from, to, con.stmt);
+		
+		if (result == 1)
+		{
+			out.print("Hours of Operations Added Succesful");
+		}
+		else
+		{
+			out.print("Hours of Operations Added Failed");
+		}
+		
+		con.stmt.close();
+	}
+	catch (Exception e)
+	{
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
+	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
+	}
 	
-	if (result == 1)
-	{
-		out.print("Hours of Operations Added Succesful");
-	}
-	else
-	{
-		out.print("Hours of Operations Added Failed");
-	}
+	
 	%>
 	<form>
 	<input type=button onclick="menu()" value = "Return to Main Menu">

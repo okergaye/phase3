@@ -37,11 +37,35 @@ View Feedback
 else
 {
 	Feedback fb = new Feedback();
-	Connector con = new Connector();
-	String result =	fb.getFeedback(vin, con.stmt);
+	Connector con=null;
+	try
+	{
+		con = new Connector();
+		
+		String result =	fb.getFeedback(vin, con.stmt);
+		
+		System.out.println("Here are your results: \n" + result);
+		out.print("Here are your results: <br>" + result);
+		con.stmt.close();
+	}
+	catch (Exception e)
+	{
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
+	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
+	}
 	
-	System.out.println("Here are your results: \n" + result);
-	out.print("Here are your results: <br>" + result);
 	%>
 	<form>
 	<input type=button onclick="menu()" value = "Return To Main Menu">

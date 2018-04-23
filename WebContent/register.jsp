@@ -72,27 +72,51 @@ All fields should be non empty.
 else
 {
 	Database user = new Database();
-	Connector con = new Connector();
-	
-	int result;
+	Connector con = null;
+	try
+	{
+		con = new Connector();
+		
+		int result;
 
-	if (type.equals("Register Standard")) //Register to standard user
-	{
-		result = user.createUberUser(tempLogin, password, name, address, phone, con.stmt);
+		if (type.equals("Register Standard")) //Register to standard user
+		{
+			result = user.createUberUser(tempLogin, password, name, address, phone, con.stmt);
+		}
+		else
+		{
+			result = user.createUberDriver(tempLogin, password, name, address, phone, con.stmt);
+		}
+		
+		if (result == 1)
+		{
+			out.print("Registration Succesful");
+		}
+		else
+		{
+			out.print("Registration Failed");
+		}
+		
+		con.stmt.close();
 	}
-	else
+	catch (Exception e)
 	{
-		result = user.createUberDriver(tempLogin, password, name, address, phone, con.stmt);
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
+	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
 	}
 	
-	if (result == 1)
-	{
-		out.print("Registration Succesful");
-	}
-	else
-	{
-		out.print("Registration Failed");
-	}
 	%>
 	<form>
 	<input type=button onclick="login()" value = "Back to Login">

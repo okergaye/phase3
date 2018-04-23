@@ -31,7 +31,7 @@ String choice = request.getParameter("choice");
 String confirm = request.getParameter("confirm");
 
 Database user = new Database();
-Connector con = new Connector();
+Connector con = null;
 ArrayList<String> rideList =  (ArrayList<String>)session.getAttribute("rideList");
 
 if(rideList == null){
@@ -56,7 +56,33 @@ if(rideList == null){
 			<%
 		}else{
 
-			String temp = user.getRide(login, vin, from, to, con.stmt);
+			String temp = "";
+			
+			try
+			{
+				con = new Connector();
+				
+				temp = user.getRide(login, vin, from, to, con.stmt);
+				
+				con.stmt.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				System.err.println ("Either connection error or query execution error!");
+			}
+			finally
+			{
+				if (con != null)
+				{
+					try
+					{
+					con.closeConnection();
+					System.out.println ("Database connection terminated");
+					}
+					catch (Exception e) { /* ignore close errors */ }
+				}	 
+			}
 			
 			//Check if the car was available at that time or not
 			if (temp == null){
@@ -74,7 +100,6 @@ if(rideList == null){
 				rideList.add(temp);
 				out.print("A car was avaliable! <br/>");
 				session.setAttribute("rideList", rideList);
-
 				
 				%>
 				<form name="userEntersCo" method=get onsubmit="" action="record.jsp">
@@ -109,14 +134,39 @@ if(rideList == null){
 		}
 		else if(confirm.equals("Y"))
 		{
-			out.print("Inserted into DB <br/>");
-			//Insert cars into the tables
-			for(String s : rideList)
+			try
 			{
-				user.insertRide(s, con.stmt);
+				con = new Connector();
+				
+				out.print("Inserted into DB <br/>");
+				//Insert cars into the tables
+				for(String s : rideList)
+				{
+					user.insertRide(s, con.stmt);
+				}
+				rideList =  new ArrayList<String>();
+				session.setAttribute("rideList", rideList);
+				
+				con.stmt.close();
 			}
-			rideList =  new ArrayList<String>();
-			session.setAttribute("rideList", rideList);
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				System.err.println ("Either connection error or query execution error!");
+			}
+			finally
+			{
+				if (con != null)
+				{
+					try
+					{
+					con.closeConnection();
+					System.out.println ("Database connection terminated");
+					}
+					catch (Exception e) { /* ignore close errors */ }
+				}	 
+			}
+			
 			%>
 			<form>
 			<input type=button onclick="menu()" value = "Return To Main Menu">

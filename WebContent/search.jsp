@@ -40,10 +40,35 @@ Search UDriver
 else
 {
 	Database user = new Database();
-	Connector con = new Connector();
-	String result = user.usefullFeedback(username, number, con.stmt);;
+	Connector con=null;
+	try
+	{
+		con = new Connector();
+		
+		String result = user.usefullFeedback(username, number, con.stmt);
+		
+		out.print(result);
+		
+		con.stmt.close();
+	}
+	catch (Exception e)
+	{
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
+	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
+	}
 	
-	out.print(result);
 	%>
 	<form>
 	<input type=button onclick="menu()" value = "Return To Main Menu">

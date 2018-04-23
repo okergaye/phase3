@@ -53,21 +53,45 @@ If Blank it will not be considered.
 else
 {
 	Database user = new Database();
-	Connector con = new Connector();
-	if (catagory == null)
+	Connector con=null;
+	try
 	{
-		catagory = "";
+		con = new Connector();
+		
+		if (catagory == null)
+		{
+			catagory = "";
+		}
+		if (address == null)
+		{
+			address = "";
+		}
+		if (model == null)
+		{
+			model = "";
+		}
+		String result = user.userBrowseUC(login, catagory, address, model, choice, con.stmt);
+		out.print(result);
+		
+		con.stmt.close();
 	}
-	if (address == null)
+	catch (Exception e)
 	{
-		address = "";
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
 	}
-	if (model == null)
+	finally
 	{
-		model = "";
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
 	}
-	String result = user.userBrowseUC(login, catagory, address, model, choice, con.stmt);
-	out.print(result);
 	%>
 	<form>
 	<input type=button onclick="menu()" value = "Return To Main Menu">

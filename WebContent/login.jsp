@@ -67,9 +67,34 @@ else
 	}
 	
 	Database user = new Database();
-	Connector con = new Connector();
-	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-	user.verifyLogin(templogin, temppassword, type, con.stmt);
+	Connector con=null;
+	try
+	{
+		con = new Connector();
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		user.verifyLogin(templogin, temppassword, type, con.stmt);
+		
+		con.stmt.close();
+		
+	}
+	catch (Exception e)
+	{
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
+	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
+	}
 	
 	if (user.loggedIn == true)
 	{

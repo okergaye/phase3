@@ -40,20 +40,44 @@ Write Feedback
 else
 {
 	Database user = new Database();
-	Connector con = new Connector();
 	Feedback fb = new Feedback();
 	
-	//Feedback creation here
-	int result = fb.createFeedback(feedback, vin, login, con.stmt);
+	Connector con=null;
+	try
+	{
+		con = new Connector();
+		
+		//Feedback creation here
+		int result = fb.createFeedback(feedback, vin, login, con.stmt);
+		
+		if (result == 1)
+		{
+			out.print("Feedback creation Succesful");
+		}
+		else
+		{
+			out.print("Feedback creation Failed");
+		}
+		con.stmt.close();
+	}
+	catch (Exception e)
+	{
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
+	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
+	}
 	
-	if (result == 1)
-	{
-		out.print("Feedback creation Succesful");
-	}
-	else
-	{
-		out.print("Feedback creation Failed");
-	}
 	%>
 	<form>
 	<input type=button onclick="menu()" value = "Return To Main Menu">

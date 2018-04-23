@@ -37,16 +37,39 @@ Favorite UUber Car
 else
 {
 	Database user = new Database();
-	Connector con = new Connector();
-	
-	int result = user.favoriteCar(vin, login, con.stmt);
-	if (result == 1)
+	Connector con=null;
+	try
 	{
-		out.print("Car Favorite Succesful");
+		con = new Connector();
+		
+		int result = user.favoriteCar(vin, login, con.stmt);
+		if (result == 1)
+		{
+			out.print("Car Favorite Succesful");
+		}
+		else
+		{
+			out.print("Car Favorite Failed");
+		}
+		
+		con.stmt.close();
 	}
-	else
+	catch (Exception e)
 	{
-		out.print("Car Favorite Failed");
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
+	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
 	}
 	%>
 	<form>

@@ -40,19 +40,42 @@ Rate Feedback
 else
 {
 	Database user = new Database();
-	Connector con = new Connector();
 	Feedback fb = new Feedback();
-	
-	//Feedback creation here
-	int result = fb.rateFeedback(login, fid, score, con.stmt);;
-	
-	if (result == 1)
+	Connector con=null;
+	try
 	{
-		out.print("Feedback rating Succesful");
+		con = new Connector();
+		
+		//Feedback creation here
+		int result = fb.rateFeedback(login, fid, score, con.stmt);;
+		
+		if (result == 1)
+		{
+			out.print("Feedback rating Succesful");
+		}
+		else
+		{
+			out.print("Feedback rating Failed");
+		}
+		con.stmt.close();
+
 	}
-	else
+	catch (Exception e)
 	{
-		out.print("Feedback rating Failed");
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
+	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
 	}
 	%>
 	<form>

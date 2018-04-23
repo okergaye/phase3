@@ -65,19 +65,43 @@ All fields should be non empty.
 else
 {
 	Database user = new Database();
-	Connector con = new Connector();
-	
-	int result;
+	Connector con=null;
+	try
+	{
+		con = new Connector();
+		
+		int result;
 
-	result = user.modCar(user.login, vin, category, make, model, con.stmt);
-	
-	if (result == 1)
-	{
-		out.print("Car Updated Succesful");
+		result = user.modCar(user.login, vin, category, make, model, con.stmt);
+
+		con.stmt.close();
+		
+		if (result == 1)
+		{
+			out.print("Car Updated Succesful");
+		}
+		else
+		{
+			out.print("Car Updated Failed");
+		}
+
 	}
-	else
+	catch (Exception e)
 	{
-		out.print("Car Updated Failed");
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
+	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
 	}
 	%>
 	<form>

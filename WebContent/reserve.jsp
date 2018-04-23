@@ -24,7 +24,7 @@ ArrayList<Triple> confirmedList = (ArrayList<Triple>)session.getAttribute("confi
 ArrayList<Triple> tempList = (ArrayList<Triple>)session.getAttribute("tempList");
 
 Database user = new Database();
-Connector con = new Connector();
+Connector con = null;
 
 if (choice != null)
 {
@@ -60,11 +60,35 @@ else if (confirm != null)
 {
 	if (confirm.toUpperCase().equals("Y"))
 	{
-		for (Triple temp : confirmedList)
+		try
 		{
-			user.reserveCarInsert(login, temp.vin, temp.pid, temp.cost, temp.time, con.stmt);
+			con = new Connector();
+			
+			for (Triple temp : confirmedList)
+			{
+				user.reserveCarInsert(login, temp.vin, temp.pid, temp.cost, temp.time, con.stmt);
+			}
+			out.print("Confirmed!");
+			
+			con.stmt.close();
 		}
-		out.print("Confirmed!");
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			System.err.println ("Either connection error or query execution error!");
+		}
+		finally
+		{
+			if (con != null)
+			{
+				try
+				{
+				con.closeConnection();
+				System.out.println ("Database connection terminated");
+				}
+				catch (Exception e) { /* ignore close errors */ }
+			}	 
+		}
 		%>
 		<form>
 		<input type=button onclick="menu()" value = "Return To Main Menu">
@@ -85,13 +109,37 @@ else if (confirm != null)
 else if (from != null || vin != null)
 {
 	ArrayList<Triple> list = new ArrayList<Triple>();
-
+	
 	if(vin == null)
 	{
 		if (from != null)
 		{
-			int time = Integer.parseInt(from);
-			list = user.reserveCar(login, time, con.stmt);
+			try
+			{
+				con = new Connector();
+
+				int time = Integer.parseInt(from);
+				list = user.reserveCar(login, time, con.stmt);
+				
+				con.stmt.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				System.err.println ("Either connection error or query execution error!");
+			}
+			finally
+			{
+				if (con != null)
+				{
+					try
+					{
+					con.closeConnection();
+					System.out.println ("Database connection terminated");
+					}
+					catch (Exception e) { /* ignore close errors */ }
+				}	 
+			}
 		}
 		// Print out list of cars to reserve available 
 		out.print("Here are all available Uber Cars: (There are none avaliable if this is empty) <br/>");
@@ -119,9 +167,33 @@ else if (from != null || vin != null)
 		{
 			if (temp.vin.equals(vin))
 			{
-				confirmedList.add(new Triple(vin, temp.pid, temp.cost, temp.time));
-				out.print("Added VIN #: "+ vin + "<br/>");
-				out.print(user.suggestion(login, vin, con.stmt));
+				try
+				{
+					con = new Connector();
+					
+					confirmedList.add(new Triple(vin, temp.pid, temp.cost, temp.time));
+					out.print("Added VIN #: "+ vin + "<br/>");
+					out.print(user.suggestion(login, vin, con.stmt));
+					
+					con.stmt.close();
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+					System.err.println ("Either connection error or query execution error!");
+				}
+				finally
+				{
+					if (con != null)
+					{
+						try
+						{
+						con.closeConnection();
+						System.out.println ("Database connection terminated");
+						}
+						catch (Exception e) { /* ignore close errors */ }
+					}	 
+				}
 				
 			}
 		}

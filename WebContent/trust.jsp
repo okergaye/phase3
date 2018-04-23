@@ -41,34 +41,58 @@ Trust User Settings
 else
 {
 	Database user = new Database();
-	Connector con = new Connector();
-	int trust = -1;
-	
-	if (trusttype.equals("Trust"))
+	Connector con=null;
+	try
 	{
-		trust = 1;
-	}
-	
-	int check = user.userExists(username, con.stmt);
-	
-	System.out.println(username);
-	
-	if (check == 1)
-	{
-		int result = user.trustUser(login, username, trust, con.stmt);
-		if (result == 1)
+		con = new Connector();
+		
+		int trust = -1;
+		
+		if (trusttype.equals("Trust"))
 		{
-			out.print("Trust Setting Update Success");
+			trust = 1;
+		}
+		
+		int check = user.userExists(username, con.stmt);
+		
+		System.out.println(username);
+		
+		if (check == 1)
+		{
+			int result = user.trustUser(login, username, trust, con.stmt);
+			if (result == 1)
+			{
+				out.print("Trust Setting Update Success");
+			}
+			else
+			{
+				out.print("Trust Setting Update Fail");
+			}
 		}
 		else
 		{
-			out.print("Trust Setting Update Fail");
+			out.print("User does not exists.");
 		}
+		con.stmt.close();
 	}
-	else
+	catch (Exception e)
 	{
-		out.print("User does not exists.");
+		e.printStackTrace();
+		System.err.println ("Either connection error or query execution error!");
 	}
+	finally
+	{
+		if (con != null)
+		{
+			try
+			{
+			con.closeConnection();
+			System.out.println ("Database connection terminated");
+			}
+			catch (Exception e) { /* ignore close errors */ }
+		}	 
+	}
+	
 	%>
 	<form>
 	<input type=button onclick="menu()" value = "Return To Main Menu">
